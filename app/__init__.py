@@ -1,5 +1,5 @@
-from flask import Flask
 import os
+from flask import Flask
 from flask.ext.login import LoginManager
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.heroku import Heroku
