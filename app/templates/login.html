@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3 style="color:blue">Sign In</h3>
+    <form action="" method="post" name="login">
+        {{ form.hidden_tag() }}
+        <p>
+        <div class="input-group">
+            <span class="input-group-addon" style="color:green" id="basic-addon1">Please enter your username</span>
+            <input name="username" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" value="{{ username}}">
+        </div>
+        </p>
+        <p>
+        <div class="input-group">
+            <span class="input-group-addon" style="color:green" id="basic-addon1">Please enter your password</span>
+            <input name="password" type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1" value="{{ password}}">
+        </div>
+        </p>
+        <input class="btn btn-warning" type="submit" value="{{ ('Sign Up') }}">
+    </form>
+{% endblock %}

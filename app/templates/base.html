@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>List Question</title>
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation"><a href="/index">Home</a>
+                    </li>
+                    <li role="presentation"><a href="/login">Sign In</a>
+                    </li>
+                    <li role="presentation"><a href="/register">Sign Up</a>
+                    </li>
+                    {% if current_user.is_authenticated %}
+                        <li role="presentation">
+                            <a href="{{ url_for('logout') }}">Logout</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <h3 class="text-muted">List Question</h3>
+        </div>
+        <div class="jumbotron other-color">
+            <p class="lead">
+                {% block content %}{% endblock %}
+            </p>
+        </div>
+        <div>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul class="list-group">
+                    {% for message in messages %}
+                        <li class="list-group-item list-group-item-danger"> {{ message }} </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
+        <footer class="footer">
+            <p>&copy; Nata 2015</p>
+        </footer>
+    </div>
+</body>
+</html>

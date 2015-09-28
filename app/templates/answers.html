@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+	{% if current_user.is_authenticated %}
+        <form action="" method="post" name="answer">
+        {{ form.hidden_tag() }}
+        <p>
+            <div class="input-group">
+                <span class="input-group-addon" style="color:green" id="basic-addon1">Please enter your answer</span>
+                <input name="answer" type="text" class="form-control" placeholder="Answer" aria-describedby="basic-addon1" value="{{ answer}}">
+            </div>
+        </p>
+        </form>
+    {% endif %}
+    <ul class="list-group">
+	{% for answer in answers %}
+		<li class="list-group-item list-group-item-warning">{{answer.body}}</li>
+	{% endfor %}
+	<ul>
+{% endblock %}
