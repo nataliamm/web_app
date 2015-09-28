@@ -1,7 +1,0 @@
-flask
-flask-login
-sqlalchemy
-flask-sqlalchemy
-sqlalchemy-migrate
-flask-whooshalchemy
-flask-wtf
