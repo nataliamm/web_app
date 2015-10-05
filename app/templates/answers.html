@@ -7,14 +7,21 @@
         <p>
             <div class="input-group">
                 <span class="input-group-addon" style="color:green" id="basic-addon1">Please enter your answer</span>
-                <input name="answer" type="text" class="form-control" placeholder="Answer" aria-describedby="basic-addon1" value="{{ answer}}">
+                <input name="answer" type="text" class="form-control" placeholder="Answer" aria-describedby="basic-addon1" value="{{ answer }}">
             </div>
         </p>
+        <p>
+            <div class="input-group">
+                <span class="input-group-addon" style="color:green" id="basic-addon1">Please enter question ID</span>
+                <input name="question_id" type="text" class="form-control" placeholder="Question ID" aria-describedby="basic-addon1" value="{{ question_id }}">
+            </div>
+        </p>
+        <input class="btn btn-success" type="submit" value="{{ ('Add answer') }}">
         </form>
     {% endif %}
     <ul class="list-group">
 	{% for answer in answers %}
 		<li class="list-group-item list-group-item-warning">{{answer.body}}</li>
 	{% endfor %}
-	<ul>
+	</ul>
 {% endblock %}

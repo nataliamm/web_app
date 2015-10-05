@@ -57,16 +57,22 @@ def register():
 @app.route('/answers', methods=['GET', 'POST'])
 def answers():
     form = AnswerForm()
-    question_id = 1
     if form.validate_on_submit():
-        question_id = 1
-        answer = Answer(body=form.answer.data, question_id=question_id)
+        answer = Answer(body=form.answer.data, question_id=form.question_id.data)
         db.session.add(answer)
         db.session.commit()
         flash('Answer was added')
         return redirect(url_for('index'))
-    answers_all = Answer.query.filter_by(question_id=question_id)
+    answers_all = Answer.query.all()
     return render_template("answers.html", title='Answers', form=form, answers=answers_all)
+
+
+@app.route('/question/<int:question_id>', methods=['GET', 'POST'])
+def question(question_id=None):
+    form = QuestionForm()
+    option_list = [1, 2, 3, 4, 5]
+    answers_all = Answer.query.filter_by(question_id=question_id).all()
+    return render_template("question.html", question_id=question_id, answers=answers_all, form=form, option_list=option_list)
 
 
 @app.route('/logout')

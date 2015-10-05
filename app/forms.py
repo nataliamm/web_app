@@ -1,6 +1,6 @@
 from flask import flash
 from flask.ext.wtf import Form
-from wtforms import StringField, TextField, PasswordField
+from wtforms import StringField, TextField, SelectField, PasswordField, IntegerField
 from models import User
 
 
@@ -33,8 +33,9 @@ class RegisterForm(Form):
 
 
 class QuestionForm(Form):
-    question = StringField('question')
+    voite = SelectField(u'Voite')
 
 
 class AnswerForm(Form):
     answer = StringField('answer')
+    question_id = IntegerField('questionid')

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <ul class="list-group">
+    {% for answer in answers %}
+        <li class="list-group-item list-group-item-warning">{{answer.body}}</li>
+    {% endfor %}
+    </ul>
+    <form action="" method="post" name="voite">
+        {{ form.hidden_tag() }}
+        <label><h3 style="color: blue;">Voite</h3></label>
+            <select name="option" class="form-control">
+            {% for o in option_list %}
+                <option name="{{ o }}" SELECTED>{{ o }}</option>
+            {% endfor %}
+            </select>
+    </form>
+{% endblock %}

@@ -1,25 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <a href="/answers">Answers</a>
     {% if current_user.is_authenticated %}
         <form action="" method="post" name="question">
         {{ form.hidden_tag() }}
         <p>
             <div class="input-group">
                 <span class="input-group-addon" style="color:green" id="basic-addon1">Please enter your question</span>
-                <input name="question" type="text" class="form-control" placeholder="Question" aria-describedby="basic-addon1" value="{{ question}}">
+                <input name="question" type="text" class="form-control" placeholder="Question" aria-describedby="basic-addon1" value="{{ question }}">
             </div>
         </p>
         </form>
     {% endif %}
     {% for question in questions %}
-    <div class="row">
-        <div class="col-md-6" style="color:#808000">
-            <b>{{question.body}}</b>
-        </div>
-        <div class="col-md-6">
-            <a href="/answers">Answers</a>
-        </div>
+    <div style="color:#808000">
+        <a href="/question/{{question.id}}">
+            <b>{{question.body}}</b></a>
     </div>
     {% endfor %}
 {% endblock %}
