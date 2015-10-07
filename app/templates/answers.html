@@ -19,9 +19,11 @@
         <input class="btn btn-success" type="submit" value="{{ ('Add answer') }}">
         </form>
     {% endif %}
+    <p>
     <ul class="list-group">
 	{% for answer in answers %}
 		<li class="list-group-item list-group-item-warning">{{answer.body}}</li>
 	{% endfor %}
 	</ul>
+    </p>
 {% endblock %}

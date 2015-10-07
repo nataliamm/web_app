@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <a href="/answers">Answers</a>
+    <a href="/answers" class="btn btn-info" role="button">Answers</a>
     {% if current_user.is_authenticated %}
         <form action="" method="post" name="question">
         {{ form.hidden_tag() }}

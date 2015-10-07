@@ -33,7 +33,11 @@ class RegisterForm(Form):
 
 
 class QuestionForm(Form):
-    voite = SelectField(u'Voite')
+    question = StringField('question')
+
+
+class VoteForm(Form):
+    vote = SelectField('vote')
 
 
 class AnswerForm(Form):

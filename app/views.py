@@ -2,7 +2,7 @@ import datetime
 from flask import render_template, g, flash, redirect, request, url_for
 from app import app
 from flask.ext.login import login_user, logout_user, current_user
-from forms import LoginForm, RegisterForm, QuestionForm, AnswerForm
+from forms import LoginForm, RegisterForm, QuestionForm, AnswerForm, VoteForm
 from models import User, ROLE_USER, ROLE_ADMIN, Question, Answer
 from app import lm, db
 
@@ -22,19 +22,19 @@ def before_request():
 def index():
     form = QuestionForm()
     if form.validate_on_submit():
-        question = Question(body=form.question.data)
+        question = Question(body=form.question.data, voite=None)
         db.session.add(question)
         db.session.commit()
         flash('Question was added')
         return redirect(url_for('index'))
     questions_all = Question.query.all()
-    return render_template("index.html", title='Home', form=form, questions=questions_all)
+    return render_template('index.html', title='Home', form=form, questions=questions_all)
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm(csrf_enabled=False)
-    if request.method == "POST" and form.validate():
+    if request.method == 'POST' and form.validate():
         user = User.query.filter_by(username=form.username.data).first_or_404()
         login_user(user)
         flash('Logged in successfully.')
@@ -64,15 +64,21 @@ def answers():
         flash('Answer was added')
         return redirect(url_for('index'))
     answers_all = Answer.query.all()
-    return render_template("answers.html", title='Answers', form=form, answers=answers_all)
+    return render_template('answers.html', title='Answers', form=form, answers=answers_all)
 
 
 @app.route('/question/<int:question_id>', methods=['GET', 'POST'])
 def question(question_id=None):
-    form = QuestionForm()
-    option_list = [1, 2, 3, 4, 5]
+    form = VoteForm()
+    option_list = [(1, 1), (2, 2), (3, 3), (4, 4), (5, 5)]
     answers_all = Answer.query.filter_by(question_id=question_id).all()
-    return render_template("question.html", question_id=question_id, answers=answers_all, form=form, option_list=option_list)
+    if form.is_submitted():
+        question = Question.query.filter_by(id=question_id)
+        question.vote = form.vote
+        db.session.commit()
+        flash('Vote was added')
+        return redirect(url_for('index'))
+    return render_template('question.html', question_id=question_id, answers=answers_all, form=form, option_list=option_list)
 
 
 @app.route('/logout')

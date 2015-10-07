@@ -6,13 +6,16 @@
         <li class="list-group-item list-group-item-warning">{{answer.body}}</li>
     {% endfor %}
     </ul>
-    <form action="" method="post" name="voite">
+    <form action="" method="post" name="vote">
         {{ form.hidden_tag() }}
-        <label><h3 style="color: blue;">Voite</h3></label>
+        <p>
+        <label><h3 style="color: blue;">Vote</h3></label>
             <select name="option" class="form-control">
             {% for o in option_list %}
-                <option name="{{ o }}" SELECTED>{{ o }}</option>
+                <option name="{{ o }}" SELECTED>{{ o[0] }}</option>
             {% endfor %}
             </select>
+        </p>
+        <input class="btn btn-success" type="submit" value="{{ ('Add vote') }}">
     </form>
 {% endblock %}
